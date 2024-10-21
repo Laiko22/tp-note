@@ -11,6 +11,7 @@ int valeur = 0;
 int grille[taillemax][taillemax] = { 0 };
 int i;
 int j;
+int verif;
 
 void taillegrille() {
     
@@ -36,10 +37,9 @@ void taillegrille() {
         }
 
         else
-            printf("Valeurs incoherentes");
 
-        
-        
+            printf("Valeurs incoherentes");
+      
     }
 }
 void affichage() {
@@ -61,6 +61,15 @@ void affichage() {
     }
 }
 
+void verification() {
+
+    if (colonne && ligne > taille)
+        printf("Erreur de placement de la valeur");
+    if (taille > taillemax)
+        printf("Erreur de taille du cadre");
+
+
+}
 int main() {
 
     taillegrille();
