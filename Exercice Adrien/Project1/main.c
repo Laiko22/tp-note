@@ -14,11 +14,15 @@ void taillegrille() {
         printf("La taille de la grille est trop grande (max 9)\n");
     }
     else {
-        for (int i = 0; i < taille; i++) {
+        for (int i = 0; i < taille; i++) { 
+
             printf("\n");
+
             for (int j = 0; j < taille; j++) {
-                printf("| ");
+                printf("| 0 ");
             }
+
+            printf("|");
         }
     }
 }
