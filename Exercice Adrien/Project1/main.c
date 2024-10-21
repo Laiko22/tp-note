@@ -18,28 +18,53 @@ void taillegrille() {
     printf("Entrer la taille de votre grille : ");
     scanf_s("%d", &taille);
 
-    if (taille > taillemax) {
-        printf("La taille de la grille est trop grande (max 9)\n");
-    }
-    else {
+    while (verif != 1) {
 
-        printf("Quelle valeure voulez vous entrer dans votre tableau: ");
-        scanf_s("%d", &valeur);
-        printf("A quelle ligne voulez vous assigner votre valeur : ");
-        scanf_s("%d", &ligne);
-        printf("A quelle colonne voulez vous assigner votre valeur : ");
-        scanf_s("%d", &colonne);
+        if (taille > taillemax)
+            printf("La taille de la grille est trop grande (max 9)\n");
 
-        if (ligne >= 0 && ligne < taille && colonne >= 0 && colonne < taille) {
+        else {
 
-            grille[ligne - 1][colonne - 1] = valeur;
+            printf("Quelle valeure voulez vous entrer dans votre tableau: ");
+            scanf_s("%d", &valeur);
+            printf("A quelle ligne voulez vous assigner votre valeur : ");
+            scanf_s("%d", &ligne);
+            printf("A quelle colonne voulez vous assigner votre valeur : ");
+            scanf_s("%d", &colonne);
+
+            if (ligne >= 0 && ligne < taille && colonne >= 0 && colonne < taille) {
+
+                grille[ligne - 1][colonne - 1] = valeur;
+                verif = 1;
+
+            }
+
+            else
             
+                printf("\n############################################\nValeurs incoherentes, veuillez recommencer :\n############################################\n\n");
+
         }
+    }
+}
+void verification() {
 
-        else
+    if (colonne && ligne > taille)
+        printf("Erreur de placement de la valeur");
 
-            printf("Valeurs incoherentes");
-      
+    if (taille > taillemax)
+        printf("Erreur de taille du cadre");
+
+    for (int i = 0; i < taille; i++) {
+
+        int valeursligne[taillemax] = { 0 };
+
+        for (int j = 0; j < taille; j++) {
+
+            if (valeursligne[grille[i][j] - 1] == 1)
+
+                printf("Erreur : La valeur %d est repetee ");
+
+        }
     }
 }
 void affichage() {
@@ -61,27 +86,7 @@ void affichage() {
     }
 }
 
-void verification() {
 
-    if (colonne && ligne > taille)
-        printf("Erreur de placement de la valeur");
-
-    if (taille > taillemax)
-        printf("Erreur de taille du cadre");
-
-    for (int i = 0; i < taille; i++) {
-
-        int valeursligne[taillemax] = { 0 };
-
-        for (int j = 0; j < taille; j++) {
-
-            if (valeursligne[grille[i][j] - 1] == 1) 
-
-                printf("Erreur : La valeur %d est repetee ");
-
-        }
-    }
-}
 int main() {
 
     taillegrille();
