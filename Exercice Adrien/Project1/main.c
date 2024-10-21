@@ -65,10 +65,22 @@ void verification() {
 
     if (colonne && ligne > taille)
         printf("Erreur de placement de la valeur");
+
     if (taille > taillemax)
         printf("Erreur de taille du cadre");
 
+    for (int i = 0; i < taille; i++) {
 
+        int valeursligne[taillemax] = { 0 };
+
+        for (int j = 0; j < taille; j++) {
+
+            if (valeursligne[grille[i][j] - 1] == 1) 
+
+                printf("Erreur : La valeur %d est repetee ");
+
+        }
+    }
 }
 int main() {
 
