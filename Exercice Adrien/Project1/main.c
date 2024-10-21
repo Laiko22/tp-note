@@ -28,7 +28,12 @@ void taillegrille() {
         printf("A quelle colonne voulez vous assigner votre valeur : ");
         scanf_s("%d", &colonne);
 
-        grille[ligne-1][colonne-1] = valeur;
+        if (ligne >= 0 && ligne < taille && colonne >= 0 && colonne < taille) {
+            grille[ligne - 1][colonne - 1] = valeur;
+        }
+
+        else
+            printf("Valeurs incoherentes");
 
         for (int i = 0; i < taille; i++) { 
 
