@@ -3,6 +3,7 @@
 #include <stdio.h>
 #define taillemax 9
 
+
 int taille;
 int colonne = 0;
 int ligne = 0;
@@ -29,29 +30,41 @@ void taillegrille() {
         scanf_s("%d", &colonne);
 
         if (ligne >= 0 && ligne < taille && colonne >= 0 && colonne < taille) {
+
             grille[ligne - 1][colonne - 1] = valeur;
+            
         }
 
         else
             printf("Valeurs incoherentes");
 
-        for (int i = 0; i < taille; i++) { 
-
-            printf("\n");
-
-            for (int j = 0; j < taille; j++) {
-                printf("| %d ",grille[i][j]);
-            }
-
-            printf("|");
-        }
         
+        
+    }
+}
+void affichage() {
+
+    for (int i = 0; i < taille; i++) {
+
+        printf("\n");
+
+        for (int j = 0; j < taille; j++) {
+
+            if (grille[i][j] == 0)
+                printf("|   ");
+                
+            else 
+                printf("| %d ", grille[i][j]);
+        }
+
+        printf("|");
     }
 }
 
 int main() {
 
     taillegrille();
+    affichage();
 
     return 0;
 }
