@@ -7,6 +7,8 @@
 int taille;
 int grille[taillemax][taillemax] = { 0 };
 int niveau;
+int complete = 0;
+
 
 void aleatoire() {
     int totalCases = taille * taille;
@@ -59,6 +61,7 @@ void aleatoire() {
 }
 
 void taillegrille() {
+
     printf("Entrer la taille de votre grille (max %d) : ", taillemax);
     scanf_s("%d", &taille);
 
@@ -68,22 +71,66 @@ void taillegrille() {
     }
 }
 
+void grilleComplete() {
+    complete = 1;
+    for (int i = 0; i < taille; i++) {
+        for (int j = 0; j < taille; j++) {
+            if (grille[i][j] == 0) {
+                complete = 0;
+                return;
+            }
+        }
+    }
+    if (complete) {
+        printf("Felicitation ! Vous avez rempli toute la grille.\n");
+    }
+}
+
 void initialisergrille() {
+
     int ligne, colonne, valeur;
+    int fin = 0;
 
-    printf("Quelle valeur voulez-vous entrer dans votre tableau : ");
-    scanf_s("%d", &valeur);
-    printf("A quelle ligne voulez-vous assigner votre valeur (1 a %d) : ", taille);
-    scanf_s("%d", &ligne);
-    printf("A quelle colonne voulez-vous assigner votre valeur (1 a %d) : ", taille);
-    scanf_s("%d", &colonne);
+    grilleComplete();
+    if (complete) {
+        printf("La grille est deja complete !\n");
+        return;
+    }
 
-    if (ligne >= 1 && ligne <= taille && colonne >= 1 && colonne <= taille) {
+        printf("Quelle valeur voulez-vous entrer dans votre tableau : ");
+        scanf_s("%d", &valeur);
+        printf("A quelle ligne voulez-vous assigner votre valeur (1 a %d) : ", taille);
+        scanf_s("%d", &ligne);
+        printf("A quelle colonne voulez-vous assigner votre valeur (1 a %d) : ", taille);
+        scanf_s("%d", &colonne);
+
+        if (ligne < 1 || ligne > taille || colonne < 1 || colonne > taille) {
+            printf("Valeurs incoherentes, veuillez recommencer.\n");
+            return;
+        }
+
+        int deja = 0;
+
+        for (int i = 0; i < taille; i++) {
+            if (grille[ligne - 1][i] == valeur) {
+                deja = 1;
+                printf("Erreur : le nombre %d existe deja dans la ligne %d.\n", valeur, ligne);
+                break;
+            }
+            if (grille[i][colonne - 1] == valeur) {
+                deja = 1;
+                printf("Erreur : le nombre %d existe deja dans la colonne %d.\n", valeur, colonne);
+                break;
+            }
+        }
+
+        if (deja) 
+            return;
+        
+
         grille[ligne - 1][colonne - 1] = valeur;
-    }
-    else {
-        printf("Valeurs incohérentes, veuillez recommencer.\n");
-    }
+        printf("Valeur %d ajoutée à la position (%d, %d).\n", valeur, ligne, colonne);
+       
 }
 
 void affichage() {
@@ -115,7 +162,7 @@ void afficherMenu() {
     printf("3. Generer la grille aleatoirement\n");
     printf("4. Afficher la grille\n");
     printf("5. Quitter\n");
-    printf("Choisissez une option : \n");
+    printf("Choisissez une option : ");
 }
 
 int main() {
@@ -147,6 +194,7 @@ int main() {
             printf("Option invalide. Veuillez reessayer.\n");
             break;
         }
+       
     }
       
     return 0;
