@@ -5,11 +5,7 @@
 #define taillemax 9
 
 int taille;
-int colonne = 0;
-int ligne = 0;
-int valeur = 0;
 int grille[taillemax][taillemax] = { 0 };
-int verif = 0;
 int niveau;
 
 void aleatoire() {
@@ -70,6 +66,10 @@ void taillegrille() {
         printf("La taille de la grille est invalide (entre 1 et %d).\n", taillemax);
         return;
     }
+}
+
+void initialisergrille() {
+    int ligne, colonne, valeur;
 
     printf("Quelle valeur voulez-vous entrer dans votre tableau : ");
     scanf_s("%d", &valeur);
@@ -86,29 +86,10 @@ void taillegrille() {
     }
 }
 
-void verification() {
-    for (int i = 0; i < taille; i++) {
-        int valeursligne[taillemax] = { 0 };
-
-        for (int j = 0; j < taille; j++) {
-            if (grille[i][j] > 0) {
-                if (valeursligne[grille[i][j] - 1] == 1) {
-                    printf("Erreur : La valeur %d est repetee a la ligne %d\n", grille[i][j], i + 1);
-                }
-                else {
-                    valeursligne[grille[i][j] - 1] = 1;
-                }
-            }
-        }
-    }
-}
-
 void affichage() {
-
-    for (int i = 0; i < taille; i++) 
-
+    for (int i = 0; i < taille; i++) {
         printf("----");
-
+    }
     printf("-\n");
 
     for (int i = 0; i < taille; i++) {
@@ -120,20 +101,53 @@ void affichage() {
         }
         printf("|\n");
 
-        for (int j = 0; j < taille; j++) 
-
+        for (int j = 0; j < taille; j++) {
             printf("----");
-        
+        }
         printf("-\n");
     }
 }
 
-int main() {
+void afficherMenu() {
+    printf("\n=== MENU ===\n");
+    printf("1. Choisir la taille de la grille\n");
+    printf("2. Ajouter un nombre a la grille\n");
+    printf("3. Generer la grille aleatoirement\n");
+    printf("4. Afficher la grille\n");
+    printf("5. Quitter\n");
+    printf("Choisissez une option : \n");
+}
 
-    taillegrille();
-    aleatoire();
-    verification();
-    affichage();
+int main() {
+    int choix;
+    int quitter = 0;
+
+    while (!quitter) {
+        afficherMenu();
+        scanf_s("%d", &choix);
+
+        switch (choix) {
+        case 1:
+            taillegrille();
+            break;
+        case 2:
+            initialisergrille();
+            break;
+        case 3:
+            aleatoire();
+            break;
+        case 4:
+            affichage();
+            break;
+        case 5:
+            printf("Au revoir!\n");
+            quitter = 1;
+            break;
+        default:
+            printf("Option invalide. Veuillez reessayer.\n");
+            break;
+        }
+    }
 
     return 0;
 }
