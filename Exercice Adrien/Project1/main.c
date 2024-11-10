@@ -1,11 +1,13 @@
+//NOTE : 8/20
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define taillemax 9
+#define taillemax 9 // pas vu en cours
 
 int taille;
-int grille[taillemax][taillemax] = { 0 };
+int grille[taillemax][taillemax] = { 0 };   // on evite les variables globales
 int niveau;
 int complete = 0;
 
@@ -98,7 +100,7 @@ void initialisergrille() {
     }
 
         printf("Quelle valeur voulez-vous entrer dans votre tableau : ");
-        scanf_s("%d", &valeur);
+        scanf_s("%d", &valeur); // on est censé limiter la valeur à la taille du tableau
         printf("A quelle ligne voulez-vous assigner votre valeur (1 a %d) : ", taille);
         scanf_s("%d", &ligne);
         printf("A quelle colonne voulez-vous assigner votre valeur (1 a %d) : ", taille);
